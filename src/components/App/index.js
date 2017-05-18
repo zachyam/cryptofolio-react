@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Exchanges from '../Exchanges/Exchanges.js';
-import '../../css/App.css';
+import Exchanges from '../Exchanges';
 
 class App extends Component {
   render() {

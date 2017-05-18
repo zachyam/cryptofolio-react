@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import '../../css/index.css';
 import '../../css/paper-dashboard.css';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 // list of all exchanges
 const exchanges = [
   { value: 'coinbase', label: 'Coinbase' },
   { value: 'gemini', label: 'Gemini' },
   { value: 'poloniex', label: 'Poloniex' },
-  { value: 'kraken', label: 'Kraken'},
-]
+  { value: 'kraken', label: 'Kraken' },
+];
 
 // list of selected exchanges
 const selectedExchanges = [];
