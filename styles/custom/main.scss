@@ -20,20 +20,3 @@ ul, li {
   padding: 0;
   margin: 0;
 }
-
-a {
-  color: $fontColor;
-  text-decoration: none;
-
-  &:hover {
-    color: $hyperlinkHover;
-  }
-
-  &:active {
-    color: $hyperlinkActive;
-  }
-
-  &:visited {
-    color: $hyperlinkVisited;
-  }
-}

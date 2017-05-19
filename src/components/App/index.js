@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Exchanges from '../Exchanges';
+import ExchangesList from '../ExchangesList';
 
 class App extends Component {
   render() {
@@ -8,7 +8,13 @@ class App extends Component {
         <div className="App-header">
           <h3>CryptoFolio</h3>
         </div>
-        <Exchanges />
+        <div className="row">
+          <ExchangesList />
+        </div>
+        {/* <div className="row">
+          <ExchangesAccount />
+        </div> */}
+
 
       </div>
     );
