@@ -1,6 +1,4 @@
 export function setExchanges(exchange) {
-  return {
-    type: 'ADD_EXCHANGE',
-    exchange
-  };
+  return (setExchangesDispatch) =>
+    setExchangesDispatch({ type: 'ADD_EXCHANGE', exchange });
 }

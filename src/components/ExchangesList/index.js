@@ -6,28 +6,8 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 
 function ExchangesList({
-  setExchanges,
+  setExchanges
 }) {
-  // constructor(props) {
-  //   super(props);
-  //
-  //   this.state = {
-  //     exchanges,
-  //   };
-  //
-  //   this.onChange = this.onChange.bind(this);
-  // }
-  //
-  // onChange(e) {
-  //   if (!selectedExchanges.includes(e.target.value)) {
-  //     selectedExchanges.push(e.target.value);
-  //   }
-  //   this.setState = { selectedExchanges };
-  //
-  //   console.log("STATE", this.state);
-  //   console.log("SELECTED", selectedExchanges);
-  // }
-
   return (
   <DropdownButton title="Select Exchanges" id="bg-nested-dropdown">
     <MenuItem

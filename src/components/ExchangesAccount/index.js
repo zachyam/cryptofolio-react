@@ -1,12 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../css/paper-dashboard.css';
+import { connect } from 'react-redux';
 
-class ExchangesAccount extends Component {
-  render() {
-    return (
-     <p>hi</p>
-    );
-  }
+function ExchangesAccount({
+  exchangesAccountList
+}) {
+  return (
+    <p> { exchangesAccountList } </p>
+  );
 }
 
-export default ExchangesAccount;
+function mapStateToProps(state) {
+  return {
+    exchangesAccountList: state.addExchange.exchange,
+  };
+}
+
+export default connect(mapStateToProps)(ExchangesAccount);

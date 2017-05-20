@@ -1,10 +1,7 @@
-import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { addExchange } from './addExchange';
 
-import browse from './browse';
-
-
-export default combineReducers({
-  browse,
+export const reducers = {
+  addExchange,
   routing: routerReducer
-});
+};

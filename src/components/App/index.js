@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ExchangesList from '../ExchangesList';
+import ExchangesAccount from '../ExchangesAccount';
 
 class App extends Component {
   render() {
@@ -11,9 +12,9 @@ class App extends Component {
         <div className="row">
           <ExchangesList />
         </div>
-        {/* <div className="row">
+        <div className="row">
           <ExchangesAccount />
-        </div> */}
+        </div>
 
 
       </div>
