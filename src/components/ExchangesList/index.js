@@ -17,13 +17,13 @@ function ExchangesList({
     >
       Coinbase
     </MenuItem>
-    {/* <MenuItem
-      eventKey="2"
-      onClick={this.onChange}
+    <MenuItem
+      eventKey="1"
+      onClick={(event) => setExchanges(event.target.value)}
       value="gemini"
     >
-    Gemini
-  </MenuItem> */}
+      Gemini
+    </MenuItem>
   </DropdownButton>
   );
 }

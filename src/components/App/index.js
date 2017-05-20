@@ -12,7 +12,7 @@ class App extends Component {
         <div className="row">
           <ExchangesList />
         </div>
-        <div className="row">
+        <div className="exchangeAccountsRow" >
           <ExchangesAccount />
         </div>
 
