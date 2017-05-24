@@ -1,7 +1,7 @@
 import { routerReducer } from 'react-router-redux';
-import { addExchange } from './addExchange';
+import { fetchTopCurrencies } from './fetchTopCurrencies';
 
 export const reducers = {
-  addExchange,
+  fetchTopCurrencies,
   routing: routerReducer
 };

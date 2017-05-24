@@ -5,8 +5,7 @@ import App from './components/App';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { reducers } from './reducers';
-
-require('../styles/index.scss');
+import '../styles/index.scss';
 
 // compose redux store enhancers
 const composeEnhancers =

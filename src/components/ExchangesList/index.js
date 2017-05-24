@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../css/paper-dashboard.css';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -39,5 +38,10 @@ function mapDispatchToProps(dispatch) {
     setExchanges: bindActionCreators(actions.setExchanges, dispatch)
   };
 }
+
+ExchangesList.propTypes = {
+  exchangesAccountList: React.PropTypes.object,
+  setExchanges: React.PropTypes.func
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExchangesList);

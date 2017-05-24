@@ -1,6 +1,9 @@
+// es-lint-disable
 import React, { Component } from 'react';
-import ExchangesList from '../ExchangesList';
-import ExchangesAccount from '../ExchangesAccount';
+// import ExchangesList from '../ExchangesList';
+// import ExchangesAccount from '../ExchangesAccount';
+import Tabs from '../Tabs';
+import CurrencyList from '../CurrencyList';
 
 class App extends Component {
   render() {
@@ -10,10 +13,17 @@ class App extends Component {
           <h3>CryptoFolio</h3>
         </div>
         <div className="row">
-          <ExchangesList />
+          <Tabs/>
+          {/* <ExchangesList /> */}
         </div>
-        <div className="exchangeAccountsRow" >
-          <ExchangesAccount />
+        <div className="container" >
+          <div className="row">
+            <br/>
+            <br/>
+            <br/>
+            <CurrencyList/>
+          </div>
+          {/* <ExchangesAccount /> */}
         </div>
 
 
