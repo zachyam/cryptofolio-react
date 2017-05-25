@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, FormGroup, FormControl } from 'react-bootstrap';
 
 class CurrencyList extends Component {
 
@@ -12,14 +12,32 @@ class CurrencyList extends Component {
   }
 
   render() {
+    const { searchCoin } = this.props;
     const divStyle = {
-      textAlign: 'left'
+      textAlign: 'left',
+      marginTop: '0px'
     };
     let { list } = this.props;
     list = list.get('list');
     return (
       <div>
-        <h2 style={divStyle}> Popular </h2>
+        <div className="row">
+          <div className="col-md-12">
+            <div className="col-md-3">
+              <h2 style={divStyle}> Popular </h2>
+            </div>
+            <div className="col-md-offset-8">
+              <FormGroup >
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  onChange={(e) => searchCoin(e.target.value)}
+                />
+              </FormGroup>
+            </div>
+          </div>
+        </div>
+
         { !list &&
           <h2>Loading...</h2>
         }
@@ -59,13 +77,15 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchTopCurrencies: bindActionCreators(actions.fetchTopCurrencies, dispatch)
+    fetchTopCurrencies: bindActionCreators(actions.fetchTopCurrencies, dispatch),
+    searchCoin: bindActionCreators(actions.fetchCoinSearchTerm, dispatch)
   };
 }
 
 CurrencyList.propTypes = {
   list: React.PropTypes.object,
-  fetchTopCurrencies: React.PropTypes.func
+  fetchTopCurrencies: React.PropTypes.func,
+  searchCoin: React.PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyList);
