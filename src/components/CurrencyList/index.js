@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
 class CurrencyList extends Component {
 
@@ -28,30 +28,21 @@ class CurrencyList extends Component {
           <thead>
             <tr>
               <th>Rank</th>
-              <th>Currency</th>
+              <th>Coin</th>
               <th>Value</th>
               <th>Gain</th>
             </tr>
           </thead>
           <tbody style={divStyle}>
-            <tr>
-              <td>1</td>
-              <td>{list[0].name}</td>
-              <td>{list[0].market_cap_usd}</td>
-              <td>{list[0].percent_change_24h}%</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td></td>
-              <td>5.0%</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td></td>
-              <td></td>
-              <td>5.0%</td>
-            </tr>
+            {list.map(item =>
+              <tr>
+                <td>{item.rank}</td>
+                <td>{item.name}</td>
+                <td>{item.market_cap_usd}</td>
+                <td>{item.percent_change_24h}%</td>
+                <th><Button bsStyle="success">+</Button></th>
+              </tr>
+            )}
           </tbody>
       </Table>
     }
