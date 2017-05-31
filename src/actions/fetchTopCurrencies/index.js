@@ -3,39 +3,39 @@ import axios from 'axios';
 
 export function fetchTopCurrencies() {
   return (fetchTopCurrenciesDispatch) => {
-    fetchTopCurrenciesDispatch(fetchResults());
+    fetchTopCurrenciesDispatch(fetchTopCurrenciesResults());
     axios.get(`https://api.coinmarketcap.com/v1/ticker/?limit=10`)
       .then(response => {
         if (response.status != 200) {
-          fetchTopCurrenciesDispatch(fetchError(response));
+          fetchTopCurrenciesDispatch(fetchTopCurrenciesError(response));
           //return Promise.reject(user);
         } else {
-          //localStorage.setItem('id_token', user.id_token);
+          localStorage.setItem('list', response.data);
           //localStorage.setItem('id_token', user.access_token);
-          fetchTopCurrenciesDispatch(fetchSuccess(response.data));
+          fetchTopCurrenciesDispatch(fetchTopCurrenciesSuccess(response.data));
         }
       }).catch(err => console.log("Error: ", err))
     }
 }
 
-function fetchResults() {
+function fetchTopCurrenciesResults() {
   return {
-    type: 'FETCH_RESULTS',
+    type: 'FETCH_TOP_RESULTS',
     isFetching: true,
   }
 }
 
-function fetchSuccess(list) {
+function fetchTopCurrenciesSuccess(list) {
   return {
-    type: 'FETCH_SUCCESS',
+    type: 'FETCH_TOP_SUCCESS',
     isFetching: false,
     list
   }
 }
 
-function fetchError(message) {
+function fetchTopCurrenciesError(message) {
   return {
-    type: 'FETCH_ERROR',
+    type: 'FETCH_TOP_ERROR',
     isFetching: false,
     message
   }

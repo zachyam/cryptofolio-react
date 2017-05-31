@@ -17,8 +17,9 @@ class CurrencyList extends Component {
       textAlign: 'left',
       marginTop: '0px'
     };
-    let { list } = this.props;
+    let { list, searchTerm } = this.props;
     list = list.get('list');
+    searchTerm = searchTerm.get('searchTerm');
     return (
       <div>
         <div className="row">
@@ -38,7 +39,7 @@ class CurrencyList extends Component {
           </div>
         </div>
 
-        { !list &&
+        { !list && !searchTerm &&
           <h2>Loading...</h2>
         }
         { list &&
@@ -52,7 +53,7 @@ class CurrencyList extends Component {
             </tr>
           </thead>
           <tbody style={divStyle}>
-            {list.map(item =>
+            { !searchTerm && list.map(item =>
               <tr>
                 <td>{item.rank}</td>
                 <td>{item.name}</td>
@@ -61,9 +62,18 @@ class CurrencyList extends Component {
                 <th><Button bsStyle="success">+</Button></th>
               </tr>
             )}
+            { searchTerm &&
+              <tr>
+                <td>{searchTerm.rank}</td>
+                <td>{searchTerm.name}</td>
+                <td>{searchTerm.market_cap_usd}</td>
+                <td>{searchTerm.percent_change_24h}%</td>
+                <th><Button bsStyle="success">+</Button></th>
+              </tr>
+            }
           </tbody>
       </Table>
-    }
+      }
     </div>
     );
   }
@@ -71,7 +81,8 @@ class CurrencyList extends Component {
 
 function mapStateToProps(state) {
   return {
-    list: state.fetchTopCurrencies
+    list: state.fetchTopCurrencies,
+    searchTerm: state.fetchCoinSearchTerm
   };
 }
 
