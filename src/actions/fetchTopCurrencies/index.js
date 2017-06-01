@@ -10,7 +10,6 @@ export function fetchTopCurrencies() {
           fetchTopCurrenciesDispatch(fetchTopCurrenciesError(response));
           //return Promise.reject(user);
         } else {
-          localStorage.setItem('list', response.data);
           //localStorage.setItem('id_token', user.access_token);
           fetchTopCurrenciesDispatch(fetchTopCurrenciesSuccess(response.data));
         }

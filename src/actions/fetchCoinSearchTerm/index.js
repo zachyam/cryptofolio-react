@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export function fetchCoinSearchTerm(searchTerm) {
   return (fetchCoinSearchTermDispatch) => {
+    if (searchTerm === false) {
+      fetchCoinSearchTermDispatch(setSearchTermFalse());
+    }
     fetchCoinSearchTermDispatch(fetchCoinSearchResults());
     axios.get(`https://api.coinmarketcap.com/v1/ticker/${searchTerm}`)
       .then(response => {
@@ -12,11 +15,16 @@ export function fetchCoinSearchTerm(searchTerm) {
         } else {
           //localStorage.setItem('id_token', user.id_token);
           //localStorage.setItem('id_token', user.access_token);
-          console.log(response.data[0]);
           fetchCoinSearchTermDispatch(fetchCoinSearchSuccess(response.data[0]));
         }
       }).catch(err => console.log("Error: ", err))
     }
+}
+
+function setSearchTermFalse() {
+  return {
+    type: 'SET_FALSE',
+  }
 }
 
 function fetchCoinSearchResults() {

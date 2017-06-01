@@ -12,7 +12,7 @@ class CurrencyList extends Component {
   }
 
   render() {
-    const { searchCoin } = this.props;
+    const { searchCoin, fetchTopCurrencies } = this.props;
     const divStyle = {
       textAlign: 'left',
       marginTop: '0px'
@@ -32,7 +32,15 @@ class CurrencyList extends Component {
                 <FormControl
                   type="text"
                   placeholder="Search"
-                  onChange={(e) => searchCoin(e.target.value)}
+                  onChange={function(e) {
+                    if (e.target.value !== '') {
+                      searchCoin(e.target.value);
+                    } else {
+                      console.log('tt');
+                      searchCoin(false);
+                      fetchTopCurrencies();
+                    }
+                  }}
                 />
               </FormGroup>
             </div>
@@ -89,7 +97,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchTopCurrencies: bindActionCreators(actions.fetchTopCurrencies, dispatch),
-    searchCoin: bindActionCreators(actions.fetchCoinSearchTerm, dispatch)
+    searchCoin: bindActionCreators(actions.fetchCoinSearchTerm, dispatch),
   };
 }
 

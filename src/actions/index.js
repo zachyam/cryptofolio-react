@@ -8,5 +8,5 @@ export {
   setExchanges,
   authorizeExchange,
   fetchTopCurrencies,
-  fetchCoinSearchTerm
+  fetchCoinSearchTerm,
 };

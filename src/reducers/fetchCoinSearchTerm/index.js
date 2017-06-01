@@ -3,6 +3,8 @@ import { fromJS } from 'immutable';
 
 export function fetchCoinSearchTerm(state = fromJS({}), action) {
   switch (action.type) {
+    case 'SET_FALSE':
+      return state.set('searchTerm', false);
     case 'FETCH_SEARCH_RESULTS':
       return state.set('isFetching', true);
     case 'FETCH_SEARCH_SUCCESS':
