@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 // import ExchangesList from '../ExchangesList';
 // import ExchangesAccount from '../ExchangesAccount';
 import Tabs from '../Tabs';
-import CurrencyList from '../CurrencyList';
 
-class App extends Component {
+class Root extends Component {
   render() {
     return (
       <div className="App">
@@ -21,15 +20,13 @@ class App extends Component {
             <br/>
             <br/>
             <br/>
-            <CurrencyList/>
+            {this.props.children}
           </div>
           {/* <ExchangesAccount /> */}
         </div>
-
-
       </div>
     );
   }
 }
 
-export default App;
+export default Root;

@@ -36,7 +36,7 @@ class CurrencyList extends Component {
                     if (e.target.value !== '') {
                       searchCoin(e.target.value);
                     } else {
-                      console.log('tt');
+                      // search field is blank
                       searchCoin(false);
                       fetchTopCurrencies();
                     }
