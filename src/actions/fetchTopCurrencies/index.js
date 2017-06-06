@@ -4,7 +4,7 @@ import axios from 'axios';
 export function fetchTopCurrencies() {
   return (fetchTopCurrenciesDispatch) => {
     fetchTopCurrenciesDispatch(fetchTopCurrenciesResults());
-    axios.get(`https://api.coinmarketcap.com/v1/ticker/?limit=10`)
+    axios.get(`https://api.coinmarketcap.com/v1/ticker/?limit=20`)
       .then(response => {
         if (response.status != 200) {
           fetchTopCurrenciesDispatch(fetchTopCurrenciesError(response));

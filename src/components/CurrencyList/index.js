@@ -12,7 +12,7 @@ class CurrencyList extends Component {
   }
 
   render() {
-    const { searchCoin, fetchTopCurrencies } = this.props;
+    const { searchCoin, fetchTopCurrencies, addCoin } = this.props;
     const divStyle = {
       textAlign: 'left',
       marginTop: '0px'
@@ -61,13 +61,13 @@ class CurrencyList extends Component {
             </tr>
           </thead>
           <tbody style={divStyle}>
-            { !searchTerm && list.map(item =>
-              <tr>
+            { !searchTerm && list.map((item, index) =>
+              <tr key={index}>
                 <td>{item.rank}</td>
                 <td>{item.name}</td>
                 <td>{item.market_cap_usd}</td>
                 <td>{item.percent_change_24h}%</td>
-                <th><Button bsStyle="success">+</Button></th>
+                <th><Button bsStyle="success" onClick={function() { addCoin(index, item.name); }}>+</Button></th>
               </tr>
             )}
             { searchTerm &&
@@ -76,7 +76,7 @@ class CurrencyList extends Component {
                 <td>{searchTerm.name}</td>
                 <td>{searchTerm.market_cap_usd}</td>
                 <td>{searchTerm.percent_change_24h}%</td>
-                <th><Button bsStyle="success">+</Button></th>
+                <th><Button bsStyle="success" onClick={function() { addCoin(searchTerm.rank, searchTerm.name); }}>+</Button></th>
               </tr>
             }
           </tbody>
@@ -98,6 +98,7 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchTopCurrencies: bindActionCreators(actions.fetchTopCurrencies, dispatch),
     searchCoin: bindActionCreators(actions.fetchCoinSearchTerm, dispatch),
+    addCoin: bindActionCreators(actions.addCoin, dispatch),
   };
 }
 
@@ -105,6 +106,7 @@ CurrencyList.propTypes = {
   list: React.PropTypes.object,
   fetchTopCurrencies: React.PropTypes.func,
   searchCoin: React.PropTypes.func,
+  addCoin: React.PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyList);
