@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Root from './components/Root';
 import TokenList from './components/TokenList';
 import CurrencyList from './components/CurrencyList';
+import Dashboard from './components/Dashboard';
 
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -51,6 +52,7 @@ class App extends Component {
             <IndexRoute component={CurrencyList} />
             <Route path="currencies" component={CurrencyList}></Route>
             <Route path="tokens" component={TokenList}></Route>
+            <Route path="dashboard" component={Dashboard}></Route>
           </Route>
         </Router>
       </Provider>

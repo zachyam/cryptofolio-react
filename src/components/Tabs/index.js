@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 function Tabs() {
   return (
@@ -11,7 +12,7 @@ function Tabs() {
         <Button bsStyle="info">Tokens</Button>
       </div>
       <div className="col-md-4">
-        <Button bsStyle="success">Dashboard</Button>
+        <Button bsStyle="success"><Link to="/dashboard">Dashboard</Link></Button>
       </div>
     </div>
   );
