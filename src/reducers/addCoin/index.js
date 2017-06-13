@@ -1,9 +1,10 @@
-import { fromJS } from 'immutable';
-
-export function addCoin(state = fromJS({}), action) {
+/* eslint-disable */
+export function addCoin(state = {}, action) {
   switch (action.type) {
     case 'ADD_COIN':
-      return state.set(action.index, action.coin);
+      let newObj={};
+      newObj[action.index] = action.coin;
+      return Object.assign({}, state, newObj);
     default:
       return state;
   }

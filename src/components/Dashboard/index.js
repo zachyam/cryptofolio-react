@@ -1,12 +1,20 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
 
   render() {
-    const { coins } = this.props;
+    let { coins } = this.props;
+    console.log(coins);
     return (
-      <h1> Test {coins}</h1>
+      <div>
+        <h1> Test </h1>
+        {Object.keys(coins).map((coin, index) =>
+          <h4 key={index}> {coins[coin]} </h4>
+        )}
+      </div>
     );
   }
 }

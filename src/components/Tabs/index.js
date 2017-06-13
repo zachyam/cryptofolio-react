@@ -6,13 +6,13 @@ function Tabs() {
   return (
     <div className="col-md-12">
       <div className="col-md-4">
-        <Button bsStyle="primary">Coins</Button>
+        <Link to="/"><Button bsStyle="primary">Coins</Button></Link>
       </div>
       <div className="col-md-4">
         <Button bsStyle="info">Tokens</Button>
       </div>
       <div className="col-md-4">
-        <Button bsStyle="success"><Link to="/dashboard">Dashboard</Link></Button>
+        <Link to="/dashboard"><Button bsStyle="success">Dashboard</Button></Link>
       </div>
     </div>
   );
