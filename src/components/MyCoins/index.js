@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Overview from '../Overview';
+import CoinInfo from '../CoinInfo';
 import { Tab, Row, Col, Nav, NavItem } from 'react-bootstrap';
 
 class MyCoins extends Component {
@@ -20,7 +22,7 @@ class MyCoins extends Component {
                   Overview
                 </NavItem>
                 { Object.keys(coins).map((coin, index) =>
-                  <NavItem style={divStyle} eventKey={index}>
+                  <NavItem style={divStyle} eventKey={coins[coin]}>
                     {coins[coin]}
                   </NavItem>
                 )}
@@ -29,11 +31,13 @@ class MyCoins extends Component {
             <Col sm={10}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="overview">
-                  Overview
+                  <Overview />
                 </Tab.Pane>
-                <Tab.Pane eventKey="second">
-                  Tab 2 content
-                </Tab.Pane>
+                { Object.keys(coins).map((coin, index) =>
+                  <Tab.Pane eventKey={coins[coin]}>
+                    <CoinInfo coin={coins[coin]} />                    
+                  </Tab.Pane>
+                )}
               </Tab.Content>
             </Col>
           </Row>
