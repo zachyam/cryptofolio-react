@@ -80,6 +80,8 @@
     "redux-logger": "2.6.1",
     "redux-thunk": "2.1.0",
     "rn-redux-mixpanel": "1.1.9",
+    "semantic-ui-css": "^2.2.10",
+    "semantic-ui-react": "^0.68.5",
     "soundcloud": "3.0.1",
     "waveform.js": "1.0.0",
     "whatwg-fetch": "2.0.1"

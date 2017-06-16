@@ -1,19 +1,14 @@
 /* eslint-disable */
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import MyCoins from '../MyCoins';
 
 class Dashboard extends Component {
 
   render() {
-    let { coins } = this.props;
-    console.log(coins);
     return (
       <div>
-        <h1> Test </h1>
-        {Object.keys(coins).map((coin, index) =>
-          <h4 key={index}> {coins[coin]} </h4>
-        )}
+        <MyCoins />
       </div>
     );
   }
@@ -21,7 +16,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    coins: state.addCoin
+    state
   };
 }
 
