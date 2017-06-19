@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Col, Modal, FieldGroup } from 'react-bootstrap';
+import { Button, Col, Modal, FormGroup, ControlLabel, FormControl, FieldGroup } from 'react-bootstrap';
 
 class CoinInfo extends Component {
   constructor(props) {
@@ -21,6 +21,15 @@ class CoinInfo extends Component {
   };
 
   render() {
+    function FieldGroup({ id, label, help, ...props }) {
+      return (
+        <FormGroup controlId={id}>
+          <ControlLabel>{label}</ControlLabel>
+          <FormControl {...props} />
+          {help && <HelpBlock>{help}</HelpBlock>}
+        </FormGroup>
+      );
+    }
     const { coin } = this.props;
     return (
       <div>
@@ -34,12 +43,22 @@ class CoinInfo extends Component {
           <Modal.Body>
             <Button bsStyle="success">Buy</Button>
             <Button bsStyle="danger">Sell</Button>
+            <br/>
+            <br/>
             <FieldGroup
               id="formControlsText"
               type="text"
-              label="Text"
-              placeholder="Amount of"
+              label="Amount"
+              placeholder={coin}
             />
+            <br/>
+            <FormGroup controlId="formControlsSelect">
+              <ControlLabel>Exchange</ControlLabel>
+              <FormControl componentClass="select" placeholder="select">
+                <option value="select">select</option>
+                <option value="other">...</option>
+              </FormControl>
+            </FormGroup>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close}>Close</Button>
