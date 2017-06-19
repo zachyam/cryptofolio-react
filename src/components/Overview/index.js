@@ -5,18 +5,16 @@ import { connect } from 'react-redux';
 class Overview extends Component {
 
   render() {
-
+    const { coinList } = this.props;
+    console.log(coinList);
     return (
       <div>
-        <h1> Overview </h1>
+        { Object.keys(coinList).length == 0 &&
+          <h3> Your portfolio is currently empty. Add more coins using the tab above. </h3>
+        }
       </div>
     );
   }
-}
-
-function mapStateToProps(state) {
-  return {
-  };
 }
 
 function mapDispatchToProps() {
@@ -24,4 +22,4 @@ function mapDispatchToProps() {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Overview);
+export default connect(mapDispatchToProps)(Overview);

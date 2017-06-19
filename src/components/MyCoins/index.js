@@ -31,11 +31,11 @@ class MyCoins extends Component {
             <Col sm={10}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="overview">
-                  <Overview />
+                  <Overview coinList={coins}/>
                 </Tab.Pane>
                 { Object.keys(coins).map((coin, index) =>
                   <Tab.Pane eventKey={coins[coin]}>
-                    <CoinInfo coin={coins[coin]} />                    
+                    <CoinInfo coin={coins[coin]} />
                   </Tab.Pane>
                 )}
               </Tab.Content>
