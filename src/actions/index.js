@@ -10,5 +10,5 @@ export {
   authorizeExchange,
   fetchTopCurrencies,
   fetchCoinSearchTerm,
-  addCoin
+  addCoin,
 };
