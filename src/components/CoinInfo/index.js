@@ -13,7 +13,7 @@ class CoinInfo extends Component {
   }
   render() {
     return (
-      <CoinModal onSubmit={this.submit} />
+      <CoinModal coin={this.props.coin} onSubmit={this.submit} />
     )
   }
 }

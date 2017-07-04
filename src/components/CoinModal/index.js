@@ -12,8 +12,10 @@ class CoinModal extends Component {
     this.state = { showModal: false,
                    txn: '',
                    coinAmount: '',
-                   coinCurrencyAmount: '',
-                   coinCurrency: 'USD',
+                   amountBoughtWith: '',
+                   amountBoughtWithType: 'USD',
+                   amountBoughtWithEquiv: '',
+                   amountBoughtWithEquivType: ''
                 };
 
     this.close = this.close.bind(this);
@@ -21,8 +23,10 @@ class CoinModal extends Component {
     this.setBought = this.setBought.bind(this);
     this.setSold = this.setSold.bind(this);
     this.updateCoinAmount = this.updateCoinAmount.bind(this);
-    this.updateCoinCurrency = this.updateCoinCurrency.bind(this);
-    this.updateCoinCurrencyAmount = this.updateCoinCurrencyAmount.bind(this);
+    this.updateAmountBoughtWith = this.updateAmountBoughtWith.bind(this);
+    this.updateAmountBoughtWithType = this.updateAmountBoughtWithType.bind(this);
+    this.updateAmountBoughtWithEquiv = this.updateAmountBoughtWithEquiv.bind(this);
+    this.updateAmountBoughtWithEquivType = this.updateAmountBoughtWithEquivType.bind(this);
 
   };
   setBought () {
@@ -45,12 +49,20 @@ class CoinModal extends Component {
     this.setState({ coinAmount: e.target.value });
   };
 
-  updateCoinCurrency(e) {
-    this.setState({ coinCurrency: e.target.value });
+  updateAmountBoughtWith(e) {
+    this.setState({ amountBoughtWith: e.target.value });
   };
 
-  updateCoinCurrencyAmount(e) {
-    this.setState({ coinCurrencyAmount: e.target.value });
+  updateAmountBoughtWithType(e) {
+    this.setState({ amountBoughtWithType: e.target.value });
+  };
+
+  updateAmountBoughtWithEquiv(e) {
+    this.setState({ amountBoughtWithEquiv: e.target.value });
+  };
+
+  updateAmountBoughtWithEquivType(e) {
+    this.setState({ amountBoughtWithEquivType: e.target.value });
   };
 
   render() {
@@ -66,6 +78,9 @@ class CoinModal extends Component {
     const { handleSubmit, coin } = this.props;
     const btnStyle = {
       marginRight:'10px'
+    }
+    const labelStyle = {
+      width: '100%'
     }
     return (
       <div>
@@ -86,13 +101,11 @@ class CoinModal extends Component {
               <br/>
               <Row>
                 <Col xs={6} md={6}>
-                  <label>Notes</label>
+                  <label>Amount of {coin}</label>
                   <div>
                     <Field
-                      name="notes"
-                      component="textarea"
-                      id="formControlsText"
-                      label={this.state.txn}
+                      name="coinAmount"
+                      component="input"
                       placeholder={coin}
                       value={this.state.coinAmount}
                       onChange={this.updateCoinAmount}
@@ -100,21 +113,19 @@ class CoinModal extends Component {
                   </div>
                 </Col>
                 <Col xs={6} md={6}>
-                  <label>Test</label>
+                  <label style={labelStyle}>Amount {this.state.txn}</label>
                   <Field
-                    name="test"
-                    component="textarea"
-                    id="formControlsText"
-                    type="text"
-                    label="for"
-                    placeholder="Amount"
-                    value={this.state.coinCurrencyAmount}
-                    onChange={this.updateCoinCurrencyAmount} />
+                    name="amountBoughtWith"
+                    component="input"
+                    value={this.state.amountBoughtWith}
+                    onChange={this.updateAmountBoughtWith} />
                     <Field
-                      name="control"
+                      name="amountBoughtWithType"
                       component="select"
-                      value={this.state.value} onChange={this.updateCoinCurrency}>
+                      value={this.state.amountBoughtWithType}
+                      onChange={this.updateAmountBoughtWithType}>
                       <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
                       <option value="Bitcoin">BTC</option>
                       <option value="Ethereum">ETH</option>
                     </Field>
@@ -122,33 +133,38 @@ class CoinModal extends Component {
               </Row>
               <br/>
               <FormGroup controlId="formControlsSelect">
-                <label>rr</label>
+                <label style={labelStyle}>Date of Transaction</label>
                 <Field
-                  name="rr"
-                  component="textarea"
-                  id="formControlsText"
+                  name="date"
+                  component="input"
                   type="text"
-                  label="Date"
                   placeholder="MM/DD/YY"
                 />
               </FormGroup>
               <br/>
-              { this.state.coinCurrency !== 'USD' &&
+              { (this.state.amountBoughtWithType !== 'USD' && this.state.amountBoughtWithType !== 'EUR') &&
                 <Row>
                   <Col xs={8} md={8}>
-                    <h5> <b>Value of {this.state.coinCurrency} at time of transaction </b></h5>
-                    <FieldGroup
-                      id="formControlsText"
+                    <h5> <b>Value of {this.state.amountBoughtWithType} at time of transaction </b></h5>
+                    <Field
+                      name="amountBoughtWithEquiv"
+                      component="input"
                       type="text"
-                      placeholder="Amount"
+                      value={this.state.amountBoughtWithEquiv}
+                      onChange={this.state.updateAmountBoughtWithEquiv}
                     />
-                    <FormControl componentClass="select">
-                      <option value="select">USD</option>
-                      <option value="select">EUR</option>
-                    </FormControl>
+                    <Field
+                      name="amountBoughtWithEquivType"
+                      component="select"
+                      value={this.state.updateAmountBoughtWithEquivType}
+                      onChange={this.updateAmountBoughtWithEquivType}>
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                    </Field>
                   </Col>
                 </Row>
               }
+              <br />
               <div>
                 <button type="submit" >Submit</button>
               </div>
