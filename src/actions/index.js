@@ -4,6 +4,7 @@ import { authorizeExchange } from './authorizeExchange';
 import { fetchTopCurrencies } from './fetchTopCurrencies';
 import { fetchCoinSearchTerm } from './fetchCoinSearchTerm';
 import { addCoin } from './addCoin';
+import { saveCoinInfo } from './saveCoinInfo';
 
 export {
   setExchanges,
@@ -11,4 +12,5 @@ export {
   fetchTopCurrencies,
   fetchCoinSearchTerm,
   addCoin,
+  saveCoinInfo
 };

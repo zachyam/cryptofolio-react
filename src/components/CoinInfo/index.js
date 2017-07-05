@@ -7,10 +7,17 @@ import { Field, reduxForm } from 'redux-form'
 import CoinModal from '../CoinModal'
 
 class CoinInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+
+  };
   submit(values) {
-    // print the form values to the console
+    const { saveCoinInfo } = this.props;
+    saveCoinInfo(values);
     console.log(values)
   }
+
   render() {
     return (
       <CoinModal coin={this.props.coin} onSubmit={this.submit} />
@@ -20,12 +27,18 @@ class CoinInfo extends Component {
 
 function mapStateToProps(state) {
   return {
+
   };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
   return {
+    saveCoinInfo: bindActionCreators(actions.saveCoinInfo, dispatch),
   };
 }
+
+CoinInfo.propTypes = {
+  saveCoinInfo: React.PropTypes.func
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinInfo);
