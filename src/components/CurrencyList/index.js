@@ -17,7 +17,7 @@ class CurrencyList extends Component {
       textAlign: 'left',
       marginTop: '0px'
     };
-    let { list, searchTerm } = this.props;
+    let { searchTerm, list } = this.props;
     list = list.get('list');
     searchTerm = searchTerm.get('searchTerm');
     return (
@@ -61,22 +61,22 @@ class CurrencyList extends Component {
             </tr>
           </thead>
           <tbody style={divStyle}>
-            { !searchTerm && list.map((item, index) =>
+            { !searchTerm && Object.keys(list).map((item, index) =>
               <tr key={index}>
-                <td>{item.rank}</td>
-                <td>{item.name}</td>
-                <td>{item.market_cap_usd}</td>
-                <td>{item.percent_change_24h}%</td>
-                <th><Button bsStyle="success" onClick={function() { addCoin(index, item.name); }}>+</Button></th>
+                <td>{list[item].rank}</td>
+                <td>{list[item].name}</td>
+                <td>{list[item].market_cap_usd}</td>
+                <td>{list[item].percent_change_24h}%</td>
+                <th><Button bsStyle="success" onClick={function() { addCoin(index, list[item].name); }}>+</Button></th>
               </tr>
             )}
             { searchTerm &&
-              <tr>
+              <tr key={index}>
                 <td>{searchTerm.rank}</td>
                 <td>{searchTerm.name}</td>
                 <td>{searchTerm.market_cap_usd}</td>
                 <td>{searchTerm.percent_change_24h}%</td>
-                <th><Button bsStyle="success" onClick={function() { addCoin(searchTerm.rank, searchTerm.name); }}>+</Button></th>
+                <th><Button bsStyle="success" onClick={function() { addCoin(index, searchTerm.name); }}>+</Button></th>
               </tr>
             }
           </tbody>

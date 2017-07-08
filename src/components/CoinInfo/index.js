@@ -13,8 +13,8 @@ class CoinInfo extends Component {
 
   };
   submit(values) {
-    const { saveCoinInfo } = this.props;
-    saveCoinInfo(values);
+    const { saveCoinInfo, index } = this.props;
+    saveCoinInfo(index, values);
     console.log(values)
   }
 

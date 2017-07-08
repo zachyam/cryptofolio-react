@@ -23,7 +23,7 @@ class MyCoins extends Component {
                 </NavItem>
                 { Object.keys(coins).map((coin, index) =>
                   <NavItem style={divStyle} eventKey={coins[coin]}>
-                    {coins[coin]}
+                    {coins[coin]['name']}
                   </NavItem>
                 )}
               </Nav>
@@ -35,7 +35,7 @@ class MyCoins extends Component {
                 </Tab.Pane>
                 { Object.keys(coins).map((coin, index) =>
                   <Tab.Pane eventKey={coins[coin]}>
-                    <CoinInfo coin={coins[coin]} />
+                    <CoinInfo coin={coins[coin]['name']} index={coin} />
                   </Tab.Pane>
                 )}
               </Tab.Content>

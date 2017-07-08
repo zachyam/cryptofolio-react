@@ -11,7 +11,12 @@ export function fetchTopCurrencies() {
           //return Promise.reject(user);
         } else {
           //localStorage.setItem('id_token', user.access_token);
-          fetchTopCurrenciesDispatch(fetchTopCurrenciesSuccess(response.data));
+          // convert array of objects to one objects
+          let result = {};
+          for (let i=0; i < (response.data).length; ++i) {
+            result[i] = response.data[i];
+          }
+          fetchTopCurrenciesDispatch(fetchTopCurrenciesSuccess(result));
         }
       }).catch(err => console.log("Error: ", err))
     }
@@ -28,7 +33,7 @@ function fetchTopCurrenciesSuccess(list) {
   return {
     type: 'FETCH_TOP_SUCCESS',
     isFetching: false,
-    list
+    list: list
   }
 }
 
@@ -36,6 +41,6 @@ function fetchTopCurrenciesError(message) {
   return {
     type: 'FETCH_TOP_ERROR',
     isFetching: false,
-    message
+    message: message
   }
 }
