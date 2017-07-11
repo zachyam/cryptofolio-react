@@ -27,7 +27,6 @@ class CoinInfo extends Component {
 
 function mapStateToProps(state) {
   return {
-
   };
 }
 
