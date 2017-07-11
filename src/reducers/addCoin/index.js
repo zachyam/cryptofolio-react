@@ -8,14 +8,13 @@ export function addCoin(state = {}, action) {
       const { index, values } = action;
       const coinInfo = state[index];
       const coinInfoForm = state[index]['form'];
-      const CoinInfoCount = coinInfo['formCount'];
-      console.log('lol', state[index]['formCount']);
+      const coinInfoCount = coinInfo['formCount'];
       return {
         ...state,
         [index]: {
           ...coinInfo,
           'form': { ...coinInfoForm,
-                    [CoinInfoCount]: {
+                    [coinInfoCount]: {
                       values
                     }
                   },

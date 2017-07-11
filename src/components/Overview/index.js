@@ -6,7 +6,6 @@ class Overview extends Component {
 
   render() {
     const { coinList } = this.props;
-    console.log(coinList);
     return (
       <div>
         { Object.keys(coinList).length == 0 &&

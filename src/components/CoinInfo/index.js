@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import { Field, reduxForm } from 'redux-form'
 import CoinModal from '../CoinModal'
+import CoinTxnList from '../CoinTxnList'
 
 class CoinInfo extends Component {
   constructor(props) {
@@ -15,12 +16,15 @@ class CoinInfo extends Component {
   submit(values) {
     const { saveCoinInfo, index } = this.props;
     saveCoinInfo(index, values);
-    console.log(values)
   }
 
   render() {
     return (
-      <CoinModal coin={this.props.coin} onSubmit={this.submit} />
+      <div>
+        <CoinModal coin={this.props.coin} onSubmit={this.submit} />
+        <CoinTxnList coin={this.props.coin} index={this.props.index} />
+      </div>
+
     )
   }
 }
