@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
 import { Row, Button, Col, Modal, FormGroup, ControlLabel, FormControl, FieldGroup } from 'react-bootstrap';
+import { TxnType } from '../TxnType';
 
 class CoinModal extends Component {
   constructor(props) {
@@ -27,14 +28,26 @@ class CoinModal extends Component {
     this.updateAmountBoughtWithType = this.updateAmountBoughtWithType.bind(this);
     this.updateAmountBoughtWithEquiv = this.updateAmountBoughtWithEquiv.bind(this);
     this.updateAmountBoughtWithEquivType = this.updateAmountBoughtWithEquivType.bind(this);
-
+    this.TxnType = this.TxnType.bind(this);
   };
+
+  TxnType({input}) {
+    const btnStyle = {
+      marginRight: '10px'
+    };
+    return(
+        <form>
+          <Button style={btnStyle} bsStyle="success" onClick={()=> input.onChange('bought')}>Bought</Button>
+          <Button bsStyle="danger" onClick={()=> input.onChange('sold')}>Sold</Button>
+        </form>
+    )
+  }
   setBought () {
-    this.setState({ txn: 'Bought' })
+    this.setState({ txn: '1' })
   };
 
   setSold () {
-    this.setState({ txn: 'Sold' })
+    this.setState({ txn: '2' })
   };
 
   close() {
@@ -91,12 +104,10 @@ class CoinModal extends Component {
               <Modal.Title>Add a {coin} transaction</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Row>
-                <Col xs={6} md={6}>
-                  <Button style={btnStyle} bsStyle="success" onClick={this.setBought}>Bought</Button>
-                  <Button bsStyle="danger" onClick={this.setSold}>Sold</Button>
-                </Col>
-              </Row>
+              <Field
+                name="TxnType"
+                component={this.TxnType}
+              />
               <br/>
               <br/>
               <Row>
@@ -175,7 +186,6 @@ class CoinModal extends Component {
     );
   }
 }
-
 
 export default reduxForm({
   form: 'coininfo', // a unique identifier for this form

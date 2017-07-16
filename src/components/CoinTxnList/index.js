@@ -9,7 +9,6 @@ class CoinTxnList extends Component {
     let { coins, index } = this.props;
     return (
       <div>
-        <h2>{index}</h2>
         { coins[index]['formCount'] > 0 && Object.keys(coins[index]['form']).map((txn, key) =>
           <h4 key={key}>{coins[index]['form'][txn]['values']['coinAmount']}</h4>
         )}
