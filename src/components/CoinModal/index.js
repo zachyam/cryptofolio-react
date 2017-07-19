@@ -13,19 +13,21 @@ class CoinModal extends Component {
                    txn: '',
                    amountBoughtWithType: 'USD',
                    amountBoughtWithEquiv: '',
-                   amountBoughtWithEquivType: ''
+                   amountBoughtWithEquivType: '',
+                   updateAmountBoughtWithEquivType: ''
                 };
 
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.updateAmountBoughtWithType = this.updateAmountBoughtWithType.bind(this);
-    this.updateAmountBoughtWithEquiv = this.updateAmountBoughtWithEquiv.bind(this);
     this.updateAmountBoughtWithEquivType = this.updateAmountBoughtWithEquivType.bind(this);
     this.TxnType = this.TxnType.bind(this);
     this.CoinAmount = this.CoinAmount.bind(this);
     this.AmountBoughtWith = this.AmountBoughtWith.bind(this);
     this.DateComponent = this.DateComponent.bind(this);
     this.AmountBoughtWithType = this.AmountBoughtWithType.bind(this);
+    this.AmountBoughtWithEquiv = this.AmountBoughtWithEquiv.bind(this);
+    this.AmountBoughtWithEquivType = this.AmountBoughtWithEquivType.bind(this);
 
   };
 
@@ -50,6 +52,11 @@ class CoinModal extends Component {
   updateAmountBoughtWithType(input, e) {
     input.onChange(e.target.value);
     this.setState({ amountBoughtWithType: e.target.value });
+  };
+
+  updateAmountBoughtWithEquivType(input, e) {
+    input.onChange(e.target.value);
+    this.setState({ updateAmountBoughtWithEquivType: e.target.value });
   };
 
   TxnType({input}) {
@@ -115,14 +122,28 @@ class CoinModal extends Component {
     )
   };
 
-
-
-  updateAmountBoughtWithEquiv(e) {
-    this.setState({ amountBoughtWithEquiv: e.target.value });
+  AmountBoughtWithEquiv({input}) {
+    return(
+      <form>
+        <FormControl
+          {...input}
+          input="text"
+        />
+      </form>
+    )
   };
 
-  updateAmountBoughtWithEquivType(e) {
-    this.setState({ amountBoughtWithEquivType: e.target.value });
+  AmountBoughtWithEquivType({input}) {
+    return(
+      <form>
+        <FormGroup>
+          <FormControl componentClass="select" placeholder="USD" onChange={(e)=> this.updateAmountBoughtWithEquivType(input, e)}>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+          </FormControl>
+        </FormGroup>
+      </form>
+    )
   };
 
   render() {
@@ -189,30 +210,26 @@ class CoinModal extends Component {
               <br/>
               { (this.state.amountBoughtWithType !== 'USD' && this.state.amountBoughtWithType !== 'EUR') &&
                 <Row>
-                  <Col xs={8} md={8}>
-                    <h5> <b>Value of {this.state.amountBoughtWithType} at time of transaction </b></h5>
+                  <Col xs={6} md={6}>
+                    <label> Value of {this.state.amountBoughtWithType} at time of transaction </label>
                     <Field
-                      name="amountBoughtWithEquiv"
-                      component="input"
-                      type="text"
-                      value={this.state.amountBoughtWithEquiv}
-                      onChange={this.state.updateAmountBoughtWithEquiv}
+                      name="AmountBoughtWithEquiv"
+                      component={this.AmountBoughtWithEquiv}
                     />
+                  </Col>
+                  <Col  xs={6} md={6}>
+                    <label> Currency </label>
                     <Field
                       name="AmountBoughtWithEquivType"
-                      component="select"
-                      value={this.state.updateAmountBoughtWithEquivType}
-                      onChange={this.updateAmountBoughtWithEquivType}>
-                      <option value="USD">USD</option>
-                      <option value="EUR">EUR</option>
+                      component={this.AmountBoughtWithEquivType}>
                     </Field>
                   </Col>
                 </Row>
               }
               <br />
-              <div>
-                <button type="submit" >Submit</button>
-              </div>
+              <Modal.Footer>
+                <Button onClick={this.close} type="submit" bsStyle="success">Submit</Button>
+              </Modal.Footer>
             </Modal.Body>
           </form>
         </Modal>
