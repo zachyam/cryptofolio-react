@@ -102,11 +102,11 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-CurrencyList.propTypes = {
-  list: React.PropTypes.object,
-  fetchTopCurrencies: React.PropTypes.func,
-  searchCoin: React.PropTypes.func,
-  addCoin: React.PropTypes.func,
-};
+// CurrencyList.propTypes = {
+//   list: React.PropTypes.object,
+//   fetchTopCurrencies: React.PropTypes.func,
+//   searchCoin: React.PropTypes.func,
+//   addCoin: React.PropTypes.func,
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyList);

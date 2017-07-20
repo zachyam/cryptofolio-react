@@ -44,7 +44,7 @@ class CoinModal extends Component {
     this.setState({ txn: 'Bought' });
   };
 
-  setSold() {
+  setSold(input) {
     input.onChange('Sold');
     this.setState({ txn: 'Sold' });
   };
