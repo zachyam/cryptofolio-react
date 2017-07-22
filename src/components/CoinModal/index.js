@@ -11,7 +11,7 @@ class CoinModal extends Component {
     super(props);
     this.state = { showModal: false,
                    txn: '',
-                   amountBoughtWithType: 'USD',
+                   amountBoughtWithType: '',
                    amountBoughtWithEquiv: '',
                    amountBoughtWithEquivType: '',
                    updateAmountBoughtWithEquivType: ''
@@ -28,7 +28,6 @@ class CoinModal extends Component {
     this.AmountBoughtWithType = this.AmountBoughtWithType.bind(this);
     this.AmountBoughtWithEquiv = this.AmountBoughtWithEquiv.bind(this);
     this.AmountBoughtWithEquivType = this.AmountBoughtWithEquivType.bind(this);
-
   };
 
   close() {
@@ -137,7 +136,7 @@ class CoinModal extends Component {
     return(
       <form>
         <FormGroup>
-          <FormControl componentClass="select" placeholder="USD" onChange={(e)=> this.updateAmountBoughtWithEquivType(input, e)}>
+          <FormControl componentClass="select" onChange={(e)=> this.updateAmountBoughtWithEquivType(input, e)}>
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
           </FormControl>
@@ -156,17 +155,24 @@ class CoinModal extends Component {
         </FormGroup>
       );
     }
-    const { handleSubmit, coin } = this.props;
+    const { handleSubmit, coin, type, coins, index } = this.props;
     const labelStyle = {
       width: '100%'
     }
+    const marginRight = {
+      marginRight: '2%'
+    };
     return (
       <div>
-        <Button onClick={this.open} bsStyle="success">Add Transaction</Button>
+        { type == 'Add' && <Button onClick={this.open} bsStyle="success">Add Transaction</Button> }
+        { type == 'Edit' && <Button onClick={this.open} style={marginRight} bsStyle="info">Edit</Button>}
         <Modal show={this.state.showModal} onHide={this.close}>
           <form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
-              <Modal.Title>Add a {coin} transaction</Modal.Title>
+              <Modal.Title>
+                {type == 'Add' && <h4> {type} a {coin} Transaction </h4>}
+                {type == 'Edit' && <h4> {type} Transaction </h4>}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Field
@@ -177,7 +183,8 @@ class CoinModal extends Component {
               <br/>
               <Row>
                 <Col xs={6} md={6}>
-                  <label>Amount of {coin}</label>
+                  { type == 'Add' && <label>Amount of {coin}</label> }
+                  { type == 'Edit' && <label>Amount of {coins[index]['name']}</label>}
                   <div>
                     <Field
                       name="CoinAmount"
@@ -233,11 +240,27 @@ class CoinModal extends Component {
             </Modal.Body>
           </form>
         </Modal>
+        { type == 'Edit' && <Button bsStyle="danger">Delete</Button> }
       </div>
     );
   }
 }
 
-export default reduxForm({
+
+
+CoinModal = reduxForm({
   form: 'coininfo', // a unique identifier for this form
 })(CoinModal);
+
+function mapDispatchToProps() {
+  return {
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    coins: state.addCoin
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoinModal);

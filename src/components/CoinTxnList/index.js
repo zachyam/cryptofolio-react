@@ -1,9 +1,24 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tab, Row, Col, Nav, NavItem, Table } from 'react-bootstrap';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions/index';
+import CoinModal from '../CoinModal'
+import { Tab, Row, Button, Col, Nav, NavItem, Table } from 'react-bootstrap';
 
 class CoinTxnList extends Component {
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+  };
+
+  submit(txn) {
+    const { saveCoinInfo, index, values } = this.props;
+    return event1 => {
+      console.log(txn);
+      console.log(values.values);
+    }
+  }
 
   render() {
     let { coins, index } = this.props;
@@ -24,7 +39,6 @@ class CoinTxnList extends Component {
             {coins[index]['formCount'] > 0 && Object.keys(coins[index]['form']).map((txn, key) =>
               <tr key={key}>
                 <td>
-                <Col xs={4} md={4}>
                   <Row>
                     {coins[index]['form'][txn]['values']['TxnType'] == 'Bought' && <span style={bought}> {coins[index]['form'][txn]['values']['TxnType']}</span>}
                     {coins[index]['form'][txn]['values']['TxnType'] == 'Sold' && <span style={sold}> {coins[index]['form'][txn]['values']['TxnType']}</span>}
@@ -33,21 +47,26 @@ class CoinTxnList extends Component {
                   <Row>
                     {coins[index]['form'][txn]['values']['CoinAmount']}
                   </Row>
-                </Col>
                 </td>
                 <td>
-                <br/>
-                <br/>
-                <Col xs={4} md={4}>
-                  {coins[index]['form'][txn]['values']['AmountBoughtWith']} @ {coins[index]['form'][txn]['values']['AmountBoughtWithEquiv']} {coins[index]['form'][txn]['values']['AmountBoughtWithType']}
-                </Col>
+                  <br/>
+                  <br/>
+                  {coins[index]['form'][txn]['values']['AmountBoughtWith']} {coins[index]['form'][txn]['values']['AmountBoughtWithType']} @ {coins[index]['form'][txn]['values']['AmountBoughtWithEquivType']} {coins[index]['form'][txn]['values']['AmountBoughtWithEquiv']}
                 </td>
                 <td>
-                <br/>
-                <br/>
-                <Col xs={4} md={4}>
-                  {coins[index]['form'][txn]['values']['Date']}
-                </Col>
+                  <Row>
+                    Date
+                  </Row>
+                  <br/>
+                  <Row>
+                    {coins[index]['form'][txn]['values']['Date']}
+                  </Row>
+                </td>
+                <td>
+                  <br/>
+                  <Row>
+                    <CoinModal type='Edit' coin={txn} index={index} onSubmit={this.submit(txn)} />
+                  </Row>
                 </td>
               </tr>
             )}
@@ -60,11 +79,12 @@ class CoinTxnList extends Component {
 
 function mapStateToProps(state) {
   return {
-    coins: state.addCoin
+    coins: state.addCoin,
+    values: state.form.coininfo
   };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
   return {
   };
 }

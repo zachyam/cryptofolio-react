@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
-import { Field, reduxForm } from 'redux-form'
 import CoinModal from '../CoinModal'
 import CoinTxnList from '../CoinTxnList'
 
@@ -21,7 +20,7 @@ class CoinInfo extends Component {
   render() {
     return (
       <div>
-        <CoinModal coin={this.props.coin} onSubmit={this.submit} />
+        <CoinModal type='Add' coin={this.props.coin} onSubmit={this.submit} />
         <CoinTxnList coin={this.props.coin} index={this.props.index} />
       </div>
 
