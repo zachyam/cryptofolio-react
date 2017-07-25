@@ -5,6 +5,7 @@ import { fetchTopCurrencies } from './fetchTopCurrencies';
 import { fetchCoinSearchTerm } from './fetchCoinSearchTerm';
 import { addCoin } from './addCoin';
 import { saveCoinInfo } from './saveCoinInfo';
+import { saveEditedCoinInfo } from './saveEditedCoinInfo';
 
 export {
   setExchanges,
@@ -12,5 +13,6 @@ export {
   fetchTopCurrencies,
   fetchCoinSearchTerm,
   addCoin,
-  saveCoinInfo
+  saveCoinInfo,
+  saveEditedCoinInfo
 };

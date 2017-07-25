@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Root from './components/Root';
-import TokenList from './components/TokenList';
 import CurrencyList from './components/CurrencyList';
 import Dashboard from './components/Dashboard';
 
@@ -51,7 +50,6 @@ class App extends Component {
           <Route path="/" component={Root}>
             <IndexRoute component={CurrencyList} />
             <Route path="currencies" component={CurrencyList}></Route>
-            <Route path="tokens" component={TokenList}></Route>
             <Route path="dashboard" component={Dashboard}></Route>
           </Route>
         </Router>

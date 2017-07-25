@@ -21,6 +21,22 @@ export function addCoin(state = {}, action) {
           'formCount': state[index]['formCount'] + 1
         },
       }
+    case 'SAVE_EDITED_COIN_INFO':
+      const { indexCoin, txn, editedValues } = action;
+      const editedCoinInfo = state[indexCoin];
+      const editedCoinInfoForm = state[indexCoin]['form'];
+      return {
+        ...state,
+        [indexCoin]: {
+          ...editedCoinInfo,
+          'form': { ...editedCoinInfoForm,
+                    [txn]: {
+                      'values': editedValues
+                    }
+                  },
+          'formCount': state[indexCoin]['formCount']
+        },
+      }
     default:
       return state;
   }

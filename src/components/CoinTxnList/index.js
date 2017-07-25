@@ -12,11 +12,13 @@ class CoinTxnList extends Component {
     this.submit = this.submit.bind(this);
   };
 
-  submit(txn) {
-    const { saveCoinInfo, index, values } = this.props;
+  submit(indexCoin,txn) {
+    const { saveEditedCoinInfo, index, values } = this.props;
     return event1 => {
       console.log(txn);
+      console.log(indexCoin);
       console.log(values.values);
+      saveEditedCoinInfo(indexCoin, txn, values.values);
     }
   }
 
@@ -65,7 +67,7 @@ class CoinTxnList extends Component {
                 <td>
                   <br/>
                   <Row>
-                    <CoinModal type='Edit' coin={txn} index={index} onSubmit={this.submit(txn)} />
+                    <CoinModal type='Edit' coin={txn} index={index} onSubmit={this.submit(index, txn)} />
                   </Row>
                 </td>
               </tr>
@@ -86,7 +88,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    saveEditedCoinInfo: bindActionCreators(actions.saveEditedCoinInfo, dispatch),
   };
 }
+
+CoinTxnList.propTypes = {
+  saveEditedCoinInfo: React.PropTypes.func
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinTxnList);
