@@ -12,7 +12,7 @@ class CurrencyList extends Component {
   }
 
   render() {
-    const { searchCoin, fetchTopCurrencies, addCoin } = this.props;
+    const { searchCoin, fetchTopCurrencies, addCoinInfo } = this.props;
     const divStyle = {
       textAlign: 'left',
       marginTop: '0px'
@@ -67,7 +67,7 @@ class CurrencyList extends Component {
                 <td>{list[item].name}</td>
                 <td>{list[item].market_cap_usd}</td>
                 <td>{list[item].percent_change_24h}%</td>
-                <th><Button bsStyle="success" onClick={function() { addCoin(index, list[item].name); }}>+</Button></th>
+                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, list[item].name); }}>+</Button></th>
               </tr>
             )}
             { searchTerm &&
@@ -76,7 +76,7 @@ class CurrencyList extends Component {
                 <td>{searchTerm.name}</td>
                 <td>{searchTerm.market_cap_usd}</td>
                 <td>{searchTerm.percent_change_24h}%</td>
-                <th><Button bsStyle="success" onClick={function() { addCoin(index, searchTerm.name); }}>+</Button></th>
+                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, searchTerm.name); }}>+</Button></th>
               </tr>
             }
           </tbody>
@@ -98,7 +98,7 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchTopCurrencies: bindActionCreators(actions.fetchTopCurrencies, dispatch),
     searchCoin: bindActionCreators(actions.fetchCoinSearchTerm, dispatch),
-    addCoin: bindActionCreators(actions.addCoin, dispatch),
+    addCoinInfo: bindActionCreators(actions.addCoinInfo, dispatch),
   };
 }
 

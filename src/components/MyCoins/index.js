@@ -49,7 +49,7 @@ class MyCoins extends Component {
 
 function mapStateToProps(state) {
   return {
-    coins: state.addCoin
+    coins: state.coinInfo
   };
 }
 

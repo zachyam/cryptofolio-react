@@ -3,16 +3,18 @@ import { setExchanges } from './setExchanges';
 import { authorizeExchange } from './authorizeExchange';
 import { fetchTopCurrencies } from './fetchTopCurrencies';
 import { fetchCoinSearchTerm } from './fetchCoinSearchTerm';
-import { addCoin } from './addCoin';
+import { addCoinInfo } from './addCoinInfo';
 import { saveCoinInfo } from './saveCoinInfo';
 import { saveEditedCoinInfo } from './saveEditedCoinInfo';
+import { deleteCoinInfo } from './deleteCoinInfo';
 
 export {
   setExchanges,
   authorizeExchange,
   fetchTopCurrencies,
   fetchCoinSearchTerm,
-  addCoin,
+  addCoinInfo,
   saveCoinInfo,
-  saveEditedCoinInfo
+  saveEditedCoinInfo,
+  deleteCoinInfo,
 };

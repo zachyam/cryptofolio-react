@@ -240,7 +240,6 @@ class CoinModal extends Component {
             </Modal.Body>
           </form>
         </Modal>
-        { type == 'Edit' && <Button bsStyle="danger">Delete</Button> }
       </div>
     );
   }
@@ -259,7 +258,7 @@ function mapDispatchToProps() {
 
 function mapStateToProps(state) {
   return {
-    coins: state.addCoin
+    coins: state.coinInfo
   };
 }
 
