@@ -8,12 +8,12 @@ class Root extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h3>CryptoFolio</h3>
-        </div>
+        <br />
+        <h3>CryptoFolio</h3>
+        <br />
+        <br />
         <div className="row">
           <Tabs/>
-          {/* <ExchangesList /> */}
         </div>
         <div className="container" >
           <div className="row">
@@ -22,7 +22,6 @@ class Root extends Component {
             <br/>
             {this.props.children}
           </div>
-          {/* <ExchangesAccount /> */}
         </div>
       </div>
     );

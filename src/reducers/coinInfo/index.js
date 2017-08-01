@@ -39,15 +39,10 @@ export function coinInfo(state = {}, action) {
       }
     case 'DELETE_COIN_INFO':
       const { indexCoinDelete, txnDelete } = action;
-      console.log(Object.keys(state[indexCoinDelete]['form']));
-      var filteredForm = Object.keys(state[indexCoinDelete]['form']).filter(function(txn) {
-        return txn !== txnDelete;
-      })
-      console.log(filteredForm);
-      // return Object.assign(...state, (Object.keys(state[indexCoinDelete]['form'])).filter(function(txn) {
-      //   console.log(txn);
-      //   return txn !== txnDelete;
-      // }))
+      let nextState = { ...state };
+      delete nextState[indexCoinDelete]['form'][txnDelete];
+      nextState[indexCoinDelete]['formCount'] = nextState[indexCoinDelete]['formCount'] - 1;
+      return nextState;
     default:
       return state;
   }

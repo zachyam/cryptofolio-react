@@ -14,11 +14,7 @@ class CoinTxnList extends Component {
 
   submit(indexCoin, txn, type) {
     const { saveEditedCoinInfo, deleteCoinInfo, index, values } = this.props;
-    return event1 => {
-      console.log(type);
-      console.log(txn);
-      console.log(indexCoin);
-      console.log(values.values);
+    return event => {
       if (type == 'edit') {
         saveEditedCoinInfo(indexCoin, txn, values.values);
       }

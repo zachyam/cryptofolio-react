@@ -13,7 +13,6 @@ class MyCoins extends Component {
       textAlign: 'left',
     };
     return (
-      <div>
         <Tab.Container id="left-tabs-example" defaultActiveKey="overview">
           <Row className="clearfix">
             <Col sm={2}>
@@ -42,7 +41,6 @@ class MyCoins extends Component {
             </Col>
           </Row>
         </Tab.Container>
-      </div>
     );
   }
 }

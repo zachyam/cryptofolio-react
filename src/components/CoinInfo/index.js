@@ -14,6 +14,7 @@ class CoinInfo extends Component {
   };
   submit(values) {
     const { saveCoinInfo, index } = this.props;
+    console.log(index);
     saveCoinInfo(index, values);
   }
 
