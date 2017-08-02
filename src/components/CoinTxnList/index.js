@@ -16,6 +16,10 @@ class CoinTxnList extends Component {
     const { saveEditedCoinInfo, deleteCoinInfo, index, values } = this.props;
     return event => {
       if (type == 'edit') {
+        console.log('txn', txn);
+        console.log('indexCoin', indexCoin);
+        console.log('values.values', values.values);
+
         saveEditedCoinInfo(indexCoin, txn, values.values);
       }
       if (type == 'delete') {
@@ -40,22 +44,22 @@ class CoinTxnList extends Component {
         <Table responsive style={tableStyle}>
           <tbody>
             <thead></thead>
-            {coins[index]['formCount'] > 0 && Object.keys(coins[index]['form']).map((txn, key) =>
-              <tr key={key}>
+            {coins[index]['formCount'] > 0 && (coins[index]['form']).map((txn, arrayIndex) =>
+              <tr>
                 <td>
                   <Row>
-                    {coins[index]['form'][txn]['values']['TxnType'] == 'Bought' && <span style={bought}> {coins[index]['form'][txn]['values']['TxnType']}</span>}
-                    {coins[index]['form'][txn]['values']['TxnType'] == 'Sold' && <span style={sold}> {coins[index]['form'][txn]['values']['TxnType']}</span>}
+                    {txn['TxnType'] == 'Bought' && <span style={bought}> {txn['TxnType']}</span>}
+                    {txn['TxnType'] == 'Sold' && <span style={sold}> {txn['TxnType']}</span>}
                   </Row>
                   <br/>
                   <Row>
-                    {coins[index]['form'][txn]['values']['CoinAmount']}
+                    {txn['CoinAmount']}
                   </Row>
                 </td>
                 <td>
                   <br/>
                   <br/>
-                  {coins[index]['form'][txn]['values']['AmountBoughtWith']} {coins[index]['form'][txn]['values']['AmountBoughtWithType']} @ {coins[index]['form'][txn]['values']['AmountBoughtWithEquivType']} {coins[index]['form'][txn]['values']['AmountBoughtWithEquiv']}
+                  {txn['AmountBoughtWith']} {txn['AmountBoughtWithType']} @ {txn['AmountBoughtWithEquivType']} {txn['AmountBoughtWithEquiv']}
                 </td>
                 <td>
                   <Row>
@@ -63,14 +67,14 @@ class CoinTxnList extends Component {
                   </Row>
                   <br/>
                   <Row>
-                    {coins[index]['form'][txn]['values']['Date']}
+                    {txn['Date']}
                   </Row>
                 </td>
                 <td>
                   <br/>
                   <Row>
-                    <CoinModal type='Edit' coin={txn} index={index} onSubmit={this.submit(index, txn, 'edit')} />
-                    <Button bsStyle="danger" onClick={this.submit(index, txn, 'delete')} >Delete</Button>
+                    <CoinModal type='Edit' coin={arrayIndex} index={index} onSubmit={this.submit(index, arrayIndex, 'edit')}/>
+                    <Button bsStyle="danger" onClick={this.submit(index, arrayIndex, 'delete')} >Delete</Button>
                   </Row>
                 </td>
               </tr>

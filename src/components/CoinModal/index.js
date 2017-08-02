@@ -162,8 +162,11 @@ class CoinModal extends Component {
     const marginRight = {
       marginRight: '2%'
     };
+    const inline = {
+      display: 'inline'
+    };
     return (
-      <div>
+      <div style={inline}>
         { type == 'Add' && <Button onClick={this.open} bsStyle="success">Add Transaction</Button> }
         { type == 'Edit' && <Button onClick={this.open} style={marginRight} bsStyle="info">Edit</Button>}
         <Modal show={this.state.showModal} onHide={this.close}>

@@ -7,42 +7,59 @@ export function coinInfo(state = {}, action) {
     case 'SAVE_COIN_INFO':
       const { index, values } = action;
       const coinInfo = state[index];
-      const coinInfoForm = state[index]['form'];
+      const coinInfoForm = state[index]['form'] || [];
       const coinInfoCount = coinInfo['formCount'];
       return {
         ...state,
         [index]: {
           ...coinInfo,
-          'form': { ...coinInfoForm,
-                    [coinInfoCount]: {
-                      values
-                    }
-                  },
+          'form': [ ...coinInfoForm.slice(0, coinInfoCount),
+                    values,
+                    ...coinInfoForm.slice(coinInfoCount)
+                  ],
           'formCount': state[index]['formCount'] + 1
         },
       }
     case 'SAVE_EDITED_COIN_INFO':
       const { indexCoin, txn, editedValues } = action;
       const editedCoinInfo = state[indexCoin];
-      const editedCoinInfoForm = state[indexCoin]['form'];
+      const editedCoinInfoForm = state[indexCoin]['form'] || [];
+      const editedCoinInfoCount = editedCoinInfo['formCount'];
       return {
         ...state,
         [indexCoin]: {
           ...editedCoinInfo,
-          'form': { ...editedCoinInfoForm,
-                    [txn]: {
-                      'values': editedValues
-                    }
-                  },
-          'formCount': state[indexCoin]['formCount']
+          'form': editedCoinInfoForm.map((item, index) => {
+                      if (index !== txn) {
+                        // This isn't the item we care about - keep it as-is
+                        return item;
+                      }
+                      // Otherwise, this is the one we want - return an updated value
+                      console.log('test')
+                      return {
+                        ...item,
+                        ...editedValues
+                      };
+                    }),
+          'formCount': editedCoinInfoCount
         },
       }
     case 'DELETE_COIN_INFO':
       const { indexCoinDelete, txnDelete } = action;
-      let nextState = { ...state };
-      delete nextState[indexCoinDelete]['form'][txnDelete];
-      nextState[indexCoinDelete]['formCount'] = nextState[indexCoinDelete]['formCount'] - 1;
-      return nextState;
+      const deletedCoinInfo = state[indexCoinDelete];
+      const deletedCoinInfoForm = state[indexCoinDelete]['form'];
+      const deletedCoinInfoCount = deletedCoinInfo['formCount'];
+      return {
+        ...state,
+        [indexCoinDelete]: {
+          ...deletedCoinInfo,
+            'form': [
+              ...deletedCoinInfoForm.slice(0, txnDelete),
+              ...deletedCoinInfoForm.slice(txnDelete + 1)
+            ],
+          'formCount': deletedCoinInfoCount - 1
+        },
+      }
     default:
       return state;
   }
