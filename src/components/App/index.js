@@ -1,7 +1,5 @@
 // es-lint-disable
 import React, { Component } from 'react';
-// import ExchangesList from '../ExchangesList';
-// import ExchangesAccount from '../ExchangesAccount';
 import Tabs from '../Tabs';
 
 class App extends Component {
@@ -13,7 +11,6 @@ class App extends Component {
         </div>
         <div className="row">
           <Tabs/>
-          {/* <ExchangesList /> */}
         </div>
         <div className="container" >
           <div className="row">
@@ -21,7 +18,6 @@ class App extends Component {
             <br/>
             <br/>
           </div>
-          {/* <ExchangesAccount /> */}
         </div>
       </div>
     );

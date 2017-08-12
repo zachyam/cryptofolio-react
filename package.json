@@ -9,6 +9,7 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js 'src/**/spec.js'",
     "test:watch": "npm run test -- --watch"
   },
+  "proxy": "localhost:5000/",
   "babel": {
     "presets": [
       "es2015",
@@ -21,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "axios": "^0.16.2",
     "babel-core": "6.3.15",
     "babel-eslint": "7.1.1",
     "babel-loader": "6.2.0",
