@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Root from './components/Root';
 import CurrencyList from './components/CurrencyList';
 import Register from './components/Register';
+import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
@@ -49,6 +50,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history}>
           <Route path="register" component={Register}></Route>
+          <Route path="login" component={Login}></Route>
           <Route path="/" component={Root}>
             <IndexRoute component={CurrencyList} />
             <Route path="currencies" component={CurrencyList}></Route>
