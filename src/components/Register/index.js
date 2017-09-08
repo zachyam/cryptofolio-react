@@ -11,7 +11,8 @@ class Register extends Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.state = { email: '',
-                   password: ''
+                   password: '',
+                   redirectTo: ''
                 };
 
   };
@@ -25,19 +26,20 @@ class Register extends Component {
   };
 
   onSubmit() {
-    axios.post('http://localhost:5000/register', {
-      data : {
-        email: this.state.email,
-        password: this.state.password
-      }
-
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    register(this.state.email, this.state.password, this.state.redirectTo);
+    // axios.post('http://localhost:5000/register', {
+    //   data : {
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   }
+    //
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
 
   };
 
@@ -76,6 +78,7 @@ class Register extends Component {
 
 function mapDispatchToProps() {
   return {
+    register: bindActionCreators(actions.register, dispatch),
   };
 }
 

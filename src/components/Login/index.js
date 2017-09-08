@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 var axios = require('axios');
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions/index';
 import { Form, FormGroup, FormControl, ControlLabel, Col, Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 
@@ -12,7 +14,8 @@ class Login extends Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.state = { email: '',
-                   password: ''
+                   password: '',
+                   redirectTo: 'dashboard'
                 };
 
   };
@@ -26,23 +29,25 @@ class Login extends Component {
   };
 
   onSubmit() {
-    axios.post('http://localhost:5000/login', {
-      data : {
-        email: this.state.email,
-        password: this.state.password
-      }
-    })
-    .then(function (response, status) {
-      if(response.status === 200 && response.data.result){
-        browserHistory.push('/dashboard')
-      } else {
-        console.log('not logged in');
-        // need to display error message
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    const { login } = this.props;
+    login(this.state.email, this.state.password, this.state.redirectTo);
+    // axios.post('http://localhost:5000/login', {
+    //   data : {
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   }
+    // })
+    // .then(function (response, status) {
+    //   if(response.status === 200 && response.data.result){
+    //     browserHistory.push('/dashboard');
+    //   } else {
+    //     console.log('not logged in');
+    //     // need to display error message
+    //   }
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
   };
 
   render() {
@@ -78,9 +83,19 @@ class Login extends Component {
   }
 }
 
-function mapDispatchToProps() {
+function mapStateToProps(state) {
   return {
   };
 }
 
-export default connect(mapDispatchToProps)(Login);
+function mapDispatchToProps(dispatch) {
+  return {
+    login: bindActionCreators(actions.login, dispatch),
+  };
+}
+
+Login.propTypes = {
+  login: React.PropTypes.func
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -6,6 +6,7 @@ import CurrencyList from './components/CurrencyList';
 import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import { requireAuthentication } from './components/AuthenticatedComponent';
 
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -54,7 +55,7 @@ class App extends Component {
           <Route path="/" component={Root}>
             <IndexRoute component={CurrencyList} />
             <Route path="currencies" component={CurrencyList}></Route>
-            <Route path="dashboard" component={Dashboard}></Route>
+            <Route path="dashboard" component={requireAuthentication(Dashboard)}></Route>
           </Route>
         </Router>
       </Provider>
