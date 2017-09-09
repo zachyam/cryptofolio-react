@@ -27,7 +27,7 @@ export function loginUserFailure(error) {
   };
 }
 
-export function login(email, password, redirect) {
+export function login(email, password) {
   return (loginDispatch) => {
     loginDispatch(loginUserRequest());
     return get_token(email, password)
@@ -36,7 +36,7 @@ export function login(email, password, redirect) {
         try {
           loginDispatch(loginUserSuccess(response.token));
           console.log(response.token);
-          browserHistory.push(redirect);
+          browserHistory.push('/dashboard');
         } catch (e) {
           alert(e);
           loginDispatch(loginUserFailure({
@@ -55,6 +55,20 @@ export function login(email, password, redirect) {
           },
       }));
     });
+  };
+}
+
+export function logout() {
+  localStorage.removeItem('token');
+  return {
+    type: 'LOGOUT_USER',
+  };
+}
+
+export function logoutAndRedirect() {
+  return (logoutAndRedirectDispatch) => {
+    logoutAndRedirectDispatch(logout());
+    browserHistory.push('/');
   };
 }
 

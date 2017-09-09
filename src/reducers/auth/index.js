@@ -12,7 +12,7 @@ const initialState = {
     registerStatusText: null,
 };
 
-export function loginUser(state = initialState, action) {
+export function auth(state = initialState, action) {
   switch (action.type) {
     case 'LOGIN_USER_REQUEST':
       return Object.assign({}, state, {
@@ -35,13 +35,13 @@ export function loginUser(state = initialState, action) {
         userName: null,
         statusText: `Authentication Error: ${action.status} ${action.statusText}`,
       });
-    default:
-      return state
-  }
-}
-
-function registerUser(state = initialState, action) {
-  switch (action.type) {
+    case 'LOGOUT_USER':
+      return Object.assign({}, state, {
+        isAuthenticated: false,
+        token: null,
+        userName: null,
+        statusText: 'You have been successfully logged out.',
+      });
     case 'REGISTER_USER_REQUEST':
       return Object.assign({}, state, {
         isRegistering: true,
@@ -66,3 +66,38 @@ function registerUser(state = initialState, action) {
       return state
   }
 }
+
+// export function logoutUser(state = initialState, action) {
+//   switch (action.type) {
+//
+//     default:
+//       return state
+//   }
+// }
+//
+// export function registerUser(state = initialState, action) {
+//   switch (action.type) {
+//     case 'REGISTER_USER_REQUEST':
+//       return Object.assign({}, state, {
+//         isRegistering: true,
+//       });
+//     case 'REGISTER_USER_SUCCESS':
+//       return Object.assign({}, state, {
+//         isAuthenticating: false,
+//         isAuthenticated: true,
+//         isRegistering: false,
+//         token: action.token,
+//         userName: jwtDecode(action.token).email,
+//         registerStatusText: 'You have been successfully logged in.',
+//       });
+//     case 'REGISTER_USER_FAILURE':
+//       return Object.assign({}, state, {
+//         isAuthenticated: false,
+//         token: null,
+//         userName: null,
+//         registerStatusText: `Register Error: ${action.status} ${action.statusText}`,
+//       });
+//     default:
+//       return state
+//   }
+// }

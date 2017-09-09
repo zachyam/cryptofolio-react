@@ -36,7 +36,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    state
+
   };
 }
 

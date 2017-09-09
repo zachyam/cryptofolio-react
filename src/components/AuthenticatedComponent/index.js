@@ -3,67 +3,68 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
+import Dashboard from '../Dashboard';
 var axios = require('axios');
+import * as actions from '../../actions/index';
 
 export function requireAuthentication(View) {
 
     class AuthenticatedComponent extends Component {
-        componentWillMount() {
-            this.checkAuth();
-            this.state = {
-                loaded_if_needed: false,
-            };
+      componentWillMount() {
+        this.checkAuth();
+        this.state = {
+            loaded_if_needed: false,
+        };
+      }
+
+      componentWillReceiveProps(nextProps) {
+          this.checkAuth(nextProps);
+      }
+
+      checkAuth(props = this.props) {
+        const { isAuthenticated, loginUserSuccess } = this.props;
+        if (!isAuthenticated) {
+          const token = localStorage.getItem('token');
+          if (token) {
+            loginUserSuccess(token);
+          }
+          else {
+            browserHistory.push('/login');
+          }
+
+                // axios.post('api/is_token_valid', {
+                //     headers: {
+                //         'Accept': 'application/json', // eslint-disable-line quote-props
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({ token }),
+                // })
+                //     .then(res => {
+                //         if (res.status === 200) {
+                //             this.props.loginUserSuccess(token);
+                //             this.setState({
+                //                 loaded_if_needed: true,
+                //             });
+                //         } else {
+                //             browserHistory.push('/login');
+                //         }
+                //     });
+
+
+        } else {
+            this.setState({
+                loaded_if_needed: true,
+            });
         }
+      }
 
-        componentWillReceiveProps(nextProps) {
-            this.checkAuth(nextProps);
-        }
-
-        checkAuth(props = this.props) {
-            if (!props.isAuthenticated) {
-              const token = localStorage.getItem('token');
-              if (!token) {
-                browserHistory.push('/login');
-              }
-
-                    // axios.post('api/is_token_valid', {
-                    //     headers: {
-                    //         'Accept': 'application/json', // eslint-disable-line quote-props
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify({ token }),
-                    // })
-                    //     .then(res => {
-                    //         if (res.status === 200) {
-                    //             this.props.loginUserSuccess(token);
-                    //             this.setState({
-                    //                 loaded_if_needed: true,
-                    //             });
-                    //         } else {
-                    //             browserHistory.push('/login');
-                    //         }
-                    //     });
-
-
-            } else {
-                this.setState({
-                    loaded_if_needed: true,
-                });
-            }
-        }
-
-        render() {
-            return (
-                <div>
-                    {this.props.isAuthenticated && this.state.loaded_if_needed
-                        ? <View {...this.props} />
-                        : null
-                    }
-                </div>
-            );
-
-        }
-
+      render() {
+        const { isAuthenticated } = this.props;
+        console.log(isAuthenticated);
+        return (
+          <Dashboard />
+        );
+      }
     }
 
     AuthenticatedComponent.propTypes = {
@@ -77,14 +78,14 @@ export function requireAuthentication(View) {
 
   function mapStateToProps(state) {
     return {
-      token: state.token,
-      userName: state.userName,
-      isAuthenticated: state.isAuthenticated,
+      token: state.auth.token,
+      userName: state.auth.userName,
+      isAuthenticated: state.auth.isAuthenticated,
     };
   }
 
   function mapDispatchToProps(dispatch) {
     return {
-      //saveCoinInfo: bindActionCreators(actions.saveCoinInfo, dispatch),
+      loginUserSuccess: bindActionCreators(actions.loginUserSuccess, dispatch),
     };
   }

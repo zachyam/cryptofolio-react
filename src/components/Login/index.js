@@ -15,7 +15,6 @@ class Login extends Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.state = { email: '',
                    password: '',
-                   redirectTo: 'dashboard'
                 };
 
   };
@@ -30,7 +29,7 @@ class Login extends Component {
 
   onSubmit() {
     const { login } = this.props;
-    login(this.state.email, this.state.password, this.state.redirectTo);
+    login(this.state.email, this.state.password);
     // axios.post('http://localhost:5000/login', {
     //   data : {
     //     email: this.state.email,
