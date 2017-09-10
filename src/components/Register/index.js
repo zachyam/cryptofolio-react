@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 var axios = require('axios');
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions/index';
 import { Form, FormGroup, FormControl, ControlLabel, Col, Button } from 'react-bootstrap';
 
 class Register extends Component {
@@ -26,7 +28,8 @@ class Register extends Component {
   };
 
   onSubmit() {
-    register(this.state.email, this.state.password, this.state.redirectTo);
+    const { registerUser } = this.props;
+    registerUser(this.state.email, this.state.password);
     // axios.post('http://localhost:5000/register', {
     //   data : {
     //     email: this.state.email,
@@ -76,10 +79,19 @@ class Register extends Component {
   }
 }
 
-function mapDispatchToProps() {
+function mapStateToProps(state) {
   return {
-    register: bindActionCreators(actions.register, dispatch),
   };
 }
 
-export default connect(mapDispatchToProps)(Register);
+function mapDispatchToProps(dispatch) {
+  return {
+    registerUser: bindActionCreators(actions.registerUser, dispatch),
+  };
+}
+
+Register.propTypes = {
+  registerUser: React.PropTypes.func
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

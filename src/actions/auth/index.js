@@ -95,7 +95,7 @@ export function registerUserFailure(error) {
   };
 }
 
-export function registerUser(email, password, redirect) {
+export function registerUser(email, password) {
   return function (registerUserDispatch) {
     registerUserDispatch(registerUserRequest());
     return create_user(email, password)
@@ -103,7 +103,7 @@ export function registerUser(email, password, redirect) {
         .then(response => {
             try {
                 registerUserDispatch(registerUserSuccess(response.token));
-                browserHistory.push(redirect);
+                browserHistory.push('/dashboard');
             } catch (e) {
                 registerUserDispatch(registerUserFailure({
                     response: {

@@ -7,7 +7,7 @@ import { addCoinInfo } from './addCoinInfo';
 import { saveCoinInfo } from './saveCoinInfo';
 import { saveEditedCoinInfo } from './saveEditedCoinInfo';
 import { deleteCoinInfo } from './deleteCoinInfo';
-import { login, loginUserRequest, loginUserSuccess, loginUserFailure, logout, logoutAndRedirect } from './auth';
+import { login, loginUserRequest, loginUserSuccess, loginUserFailure, logout, logoutAndRedirect, registerUser } from './auth';
 
 export {
   setExchanges,
@@ -24,4 +24,5 @@ export {
   loginUserFailure,
   logout,
   logoutAndRedirect,
+  registerUser,
 };

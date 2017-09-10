@@ -22,12 +22,12 @@ export function get_github_access() {
 }
 
 export function create_user(email, password) {
-    return axios.post('api/create_user', {
-      data : {
-          email,
-          password,
-        }
-    });
+  return axios.post('http://localhost:5000/register', {
+    data : {
+      email,
+      password,
+    }
+  });
 }
 
 export function get_token(email, password) {
