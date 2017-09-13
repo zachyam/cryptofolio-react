@@ -16,10 +16,6 @@ class CoinTxnList extends Component {
     const { saveEditedCoinInfo, deleteCoinInfo, index, values } = this.props;
     return event => {
       if (type == 'edit') {
-        console.log('txn', txn);
-        console.log('indexCoin', indexCoin);
-        console.log('values.values', values.values);
-
         saveEditedCoinInfo(indexCoin, txn, values.values);
       }
       if (type == 'delete') {
@@ -31,7 +27,8 @@ class CoinTxnList extends Component {
   render() {
     let { coins, index } = this.props;
     const tableStyle = {
-      marginTop: '10%'
+      marginTop: '10%',
+      overflow: 'hidden',
     };
     const bought = {
       color: 'green'

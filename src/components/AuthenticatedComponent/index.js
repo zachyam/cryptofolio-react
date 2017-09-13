@@ -60,7 +60,6 @@ export function requireAuthentication(View) {
 
       render() {
         const { isAuthenticated } = this.props;
-        console.log(isAuthenticated);
         return (
           <Dashboard />
         );
