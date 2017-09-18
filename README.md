@@ -1,4 +1,6 @@
-Cryptofolio is a webapp to simplify the monitoring of your crypto trades.
+# Cryptofolio
+
+Simplify the monitoring of your crypto trades
 
 ![Alt text](/screenshot.png?raw=true? "Optional Title")
 
