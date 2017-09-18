@@ -1,6 +1,6 @@
 # Cryptofolio
 
-Simplify the monitoring of your crypto trades
+Easily manage and monitor your crypto trades at a glance.
 
 ![Alt text](/screenshot.png?raw=true? "Optional Title")
 
