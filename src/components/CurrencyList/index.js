@@ -67,7 +67,7 @@ class CurrencyList extends Component {
                 <td>{list[item].name}</td>
                 <td>{list[item].market_cap_usd}</td>
                 <td>{list[item].percent_change_24h}%</td>
-                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, list[item].name); }}>+</Button></th>
+                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, list[item].name, list[item].symbol); }}>+</Button></th>
               </tr>
             )}
             { searchTerm &&
@@ -76,7 +76,7 @@ class CurrencyList extends Component {
                 <td>{searchTerm.name}</td>
                 <td>{searchTerm.market_cap_usd}</td>
                 <td>{searchTerm.percent_change_24h}%</td>
-                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, searchTerm.name); }}>+</Button></th>
+                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, searchTerm.name, list[item].symbol); }}>+</Button></th>
               </tr>
             }
           </tbody>

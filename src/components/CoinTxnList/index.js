@@ -25,7 +25,7 @@ class CoinTxnList extends Component {
   }
 
   render() {
-    let { coins, index } = this.props;
+    let { coins, coinSymbol, index } = this.props;
     const tableStyle = {
       marginTop: '10%',
       overflow: 'hidden',
@@ -45,18 +45,21 @@ class CoinTxnList extends Component {
               <tr>
                 <td>
                   <Row>
-                    {txn['TxnType'] == 'Bought' && <span style={bought}> {txn['TxnType']}</span>}
+                    {txn['TxnType'] == 'Bought' && <span style={bought}> {txn['TxnType']} </span>}
                     {txn['TxnType'] == 'Sold' && <span style={sold}> {txn['TxnType']}</span>}
                   </Row>
-                  <br/>
+									<br/>
                   <Row>
-                    {txn['CoinAmount']}
+                    {txn['CoinAmount']} {coinSymbol}
                   </Row>
                 </td>
                 <td>
-                  <br/>
-                  <br/>
-                  {txn['AmountBoughtWith']} {txn['AmountBoughtWithType']} @ {txn['AmountBoughtWithEquivType']} {txn['AmountBoughtWithEquiv']}
+                  <Row>
+										Rate
+                  </Row>
+									<br />
+									{ (txn['AmountBoughtWithType'] == 'USD' || txn['AmountBoughtWithType'] == 'EUR') && <Row> {txn['AmountBoughtWithType']} {txn['AmountBoughtWith']} / {coinSymbol} </Row> }
+									{ (txn['AmountBoughtWithType'] !== 'USD' && txn['AmountBoughtWithType'] !== 'EUR') && <Row> {txn['AmountBoughtWith']} {txn['AmountBoughtWithType']} @ {txn['AmountBoughtWithEquivType']} {txn['AmountBoughtWithEquiv']} / {txn['AmountBoughtWithType']}   </Row> }
                 </td>
                 <td>
                   <Row>
@@ -86,7 +89,7 @@ class CoinTxnList extends Component {
 function mapStateToProps(state) {
   return {
     coins: state.coinInfo,
-    values: state.form.coininfo
+    values: state.form.coinInfo
   };
 }
 

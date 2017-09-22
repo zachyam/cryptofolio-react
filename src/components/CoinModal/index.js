@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reset, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/index';
@@ -31,8 +31,8 @@ class CoinModal extends Component {
   };
 
   close() {
-    this.setState({ showModal: false });
-  };
+		this.setState({ showModal: false });
+	};
 
   open() {
     this.setState({ showModal: true });
@@ -98,7 +98,8 @@ class CoinModal extends Component {
     return(
       <form>
         <FormGroup>
-          <FormControl componentClass="select" placeholder="USD" onChange={(e)=> this.updateAmountBoughtWithType(input, e)}>
+          <FormControl componentClass="select" onChange={(e)=> this.updateAmountBoughtWithType(input, e)}>
+						<option value=" "> </option>
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="BTC">BTC</option>
@@ -137,6 +138,7 @@ class CoinModal extends Component {
       <form>
         <FormGroup>
           <FormControl componentClass="select" onChange={(e)=> this.updateAmountBoughtWithEquivType(input, e)}>
+						<option value=" "> </option>
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
           </FormControl>
@@ -146,15 +148,15 @@ class CoinModal extends Component {
   };
 
   render() {
-    function FieldGroup({ id, label, help, ...props }) {
-      return (
-        <FormGroup controlId={id}>
-          <ControlLabel>{label}</ControlLabel>
-          <FormControl {...props} />
-          {help && <HelpBlock>{help}</HelpBlock>}
-        </FormGroup>
-      );
-    }
+    // function FieldGroup({ id, label, help, ...props }) {
+    //   return (
+    //     <FormGroup controlId={id}>
+    //       <ControlLabel>{label}</ControlLabel>
+    //       <FormControl {...props} />
+    //       {help && <HelpBlock>{help}</HelpBlock>}
+    //     </FormGroup>
+    //   );
+    // }
     const { handleSubmit, coin, type, coins, index } = this.props;
     const labelStyle = {
       width: '100%'
@@ -218,7 +220,7 @@ class CoinModal extends Component {
                 component={this.DateComponent}
               />
               <br/>
-              { (this.state.amountBoughtWithType !== 'USD' && this.state.amountBoughtWithType !== 'EUR') &&
+              { (this.state.amountBoughtWithType !== '' && this.state.amountBoughtWithType !== 'USD' && this.state.amountBoughtWithType !== 'EUR') &&
                 <Row>
                   <Col xs={6} md={6}>
                     <label> Value of {this.state.amountBoughtWithType} at time of transaction </label>
@@ -248,10 +250,15 @@ class CoinModal extends Component {
   }
 }
 
+// clear form values
+const afterSubmit = (result, dispatch, form) => {
+	dispatch(reset(form));
+}
 
 
 CoinModal = reduxForm({
   form: 'coininfo', // a unique identifier for this form
+	onSubmitSuccess: afterSubmit,
 })(CoinModal);
 
 function mapDispatchToProps() {
@@ -261,7 +268,8 @@ function mapDispatchToProps() {
 
 function mapStateToProps(state) {
   return {
-    coins: state.coinInfo
+    coins: state.coinInfo,
+		form: state.form
   };
 }
 

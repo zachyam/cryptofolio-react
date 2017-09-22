@@ -15,13 +15,13 @@ class CoinInfo extends Component {
   submit(values) {
     const { saveCoinInfo, index } = this.props;
     saveCoinInfo(index, values);
-  }
+	}
 
   render() {
     return (
       <div>
         <CoinModal type='Add' coin={this.props.coin} onSubmit={this.submit} />
-        <CoinTxnList coin={this.props.coin} index={this.props.index} />
+        <CoinTxnList coin={this.props.coin} coinSymbol={this.props.coinSymbol} index={this.props.index} />
       </div>
 
     )

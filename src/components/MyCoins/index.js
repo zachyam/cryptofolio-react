@@ -34,7 +34,7 @@ class MyCoins extends Component {
                 </Tab.Pane>
                 { Object.keys(coins).map((coin, index) =>
                   <Tab.Pane eventKey={coins[coin]}>
-                    <CoinInfo coin={coins[coin]['name']} index={coin} />
+                    <CoinInfo coin={coins[coin]['name']} coinSymbol={coins[coin]['symbol']} index={coin} />
                   </Tab.Pane>
                 )}
               </Tab.Content>
