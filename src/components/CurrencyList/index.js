@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,20 +7,45 @@ import { Table, Button, FormGroup, FormControl } from 'react-bootstrap';
 
 class CurrencyList extends Component {
 
+  constructor(props){
+      super(props);
+      this.state = {
+          'searching': false,
+          'searchTerm': '',
+          'searchResults': {}
+      };
+      this.search = this.search.bind(this);
+  }
+
+  search(event) {
+    let { list } = this.props;
+    list = list.get('list');
+    this.setState({ 'searching': true });
+    this.setState({ 'searchTerm': event.target.value }, () => {
+      let searchResults = [];
+      Object.keys(list).map((coin, item) => {
+        if (list[item].name.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
+          searchResults.push(list[item]);
+        }
+      });
+      this.setState({ 'searchResults': searchResults });
+    })
+  }
+
   componentDidMount() {
     const { fetchTopCurrencies } = this.props;
     fetchTopCurrencies();
   }
 
   render() {
-    const { searchCoin, fetchTopCurrencies, addCoinInfo } = this.props;
+    const { fetchTopCurrencies, addCoinInfo } = this.props;
     const divStyle = {
       textAlign: 'left',
       marginTop: '0px'
     };
-    let { searchTerm, list } = this.props;
+    let { list } = this.props;
     list = list.get('list');
-    searchTerm = searchTerm.get('searchTerm');
+    //searchTerm = searchTerm.get('searchTerm');
     return (
       <div>
         <div className="row">
@@ -32,22 +58,15 @@ class CurrencyList extends Component {
                 <FormControl
                   type="text"
                   placeholder="Search"
-                  onChange={function(e) {
-                    if (e.target.value !== '') {
-                      searchCoin(e.target.value);
-                    } else {
-                      // search field is blank
-                      searchCoin(false);
-                      fetchTopCurrencies();
-                    }
-                  }}
+                  onChange={this.search}
+
                 />
               </FormGroup>
             </div>
           </div>
         </div>
 
-        { !list && !searchTerm &&
+        { !list && !this.state.searching &&
           <h2>Loading...</h2>
         }
         { list &&
@@ -61,7 +80,7 @@ class CurrencyList extends Component {
             </tr>
           </thead>
           <tbody style={divStyle}>
-            { !searchTerm && Object.keys(list).map((item, index) =>
+            { !this.state.searchTerm && Object.keys(list).map((item, index) =>
               <tr key={index}>
                 <td>{list[item].rank}</td>
                 <td>{list[item].name}</td>
@@ -70,15 +89,17 @@ class CurrencyList extends Component {
                 <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, list[item].name, list[item].symbol); }}>+</Button></th>
               </tr>
             )}
-            { searchTerm &&
+            { this.state.searching && Object.keys(this.state.searchResults).map((item, index) =>
               <tr key={index}>
-                <td>{searchTerm.rank}</td>
-                <td>{searchTerm.name}</td>
-                <td>{searchTerm.market_cap_usd}</td>
-                <td>{searchTerm.percent_change_24h}%</td>
-                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, searchTerm.name, list[item].symbol); }}>+</Button></th>
+                <td>{this.state.searchResults[item].rank}</td>
+                <td>{this.state.searchResults[item].name}</td>
+                <td>{this.state.searchResults[item].market_cap_usd}</td>
+                <td>{this.state.searchResults[item].percent_change_24h}%</td>
+                <th><Button bsStyle="success" onClick={function() { addCoinInfo(index, list[item].name, list[item].symbol); }}>+</Button></th>
               </tr>
-            }
+
+            )}
+
           </tbody>
       </Table>
       }
@@ -90,14 +111,12 @@ class CurrencyList extends Component {
 function mapStateToProps(state) {
   return {
     list: state.fetchTopCurrencies,
-    searchTerm: state.fetchCoinSearchTerm
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchTopCurrencies: bindActionCreators(actions.fetchTopCurrencies, dispatch),
-    searchCoin: bindActionCreators(actions.fetchCoinSearchTerm, dispatch),
     addCoinInfo: bindActionCreators(actions.addCoinInfo, dispatch),
   };
 }

@@ -26,7 +26,7 @@ class Tabs extends Component {
     };
     return (
       <div className="row">
-        <Link style ={paddingRight} to="/"><Button  bsStyle="primary">Coins</Button></Link>
+        <Link style ={paddingRight} to=""><Button  bsStyle="primary">Coins</Button></Link>
         <Link to="/dashboard"><Button bsStyle="success">Dashboard</Button></Link>
         { this.props.loginUserToken ? <Button style ={marginLeft} onClick={() => this.logout()}> Logout </Button> : null }
       </div>

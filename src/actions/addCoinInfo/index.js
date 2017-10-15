@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export function addCoinInfo(index, coin, symbol) {
   const newObj = {};
   newObj[index] = { name: coin, symbol: symbol };

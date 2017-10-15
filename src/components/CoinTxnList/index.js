@@ -39,8 +39,7 @@ class CoinTxnList extends Component {
     return (
       <div>
         <Table responsive style={tableStyle}>
-          <tbody>
-            <thead></thead>
+        
             {coins[index]['formCount'] > 0 && (coins[index]['form']).map((txn, arrayIndex) =>
               <tr>
                 <td>
@@ -79,7 +78,6 @@ class CoinTxnList extends Component {
                 </td>
               </tr>
             )}
-          </tbody>
         </Table>
       </div>
     );
